@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 80vh;
+		}
+
+		.header {
+			display: flex;
+			justify-content: flex-end;
+			padding: 10px;
+			background-color: #f2f2f2;
+
+		}
+
+		.login-btn,
+		.register-btn,
+		.registrarclientes-btn,
+		.salir-btn,
+		.perfil-btn{
+			background-color: #00008B;
+			color: #ffffff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-left: 10px;
+		}
+
+		.login-btn:hover,
+		.register-btn:hover,
+		.registrarclientes-btn:hover,
+		.salir-btn:hover,
+		.perfil-btn:hover{
+			background-color: #0062cc;
+		}
+
+		h1 {
+			color: #000000;
+			margin-bottom: 40px;
+		}
+
+		h2 {
+			color: #000000;
+			margin-bottom: 40px;
+		}
+		h3 {
+			color: #000000;
+			margin-bottom: 30px;
+		}
+		h4 {
+			color: #000000;
+			margin-bottom: 30px;
+		}
+
+
+		form {
+			background-color: #B0C4DE;
+			border: 1px solid #dddddd;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+			width: 80%;
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #2F4F4F;
+			text-align: left;
+		}
+
+		input[type="text"],
+		input[type="email"] {
+			padding: 10px;
+			border: 1px solid #cccccc;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			font-size: 16px;
+		}
+
+		input[type="submit"] {
+			background-color: #00008B;
+			color: #ffffff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #0062cc;
+		}
+	</style>
+	<title>Formulario de Clientes</title>
+</head>
+{% block contenido %}
+<body>
+	<div class="header">
+		{% if request.user.is_authenticated %}
+		<a class="perfil-btn" aria-current="page" href="http://127.0.0.1:8000/perfil/">{{user.username}}</a>
+        <a class="salir-btn" aria-current="page" href="http://127.0.0.1:8000/logout/">Salir</a>
+		{% endif %}
+		{% if not request.user.is_authenticated %}
+		<a class="login-btn" href="http://127.0.0.1:8000/login/">Login</a>
+		<a class="register-btn" href="http://127.0.0.1:8000/registro/">Registro</a>
+		{% endif %}
+	</div>
+	<div class="container">
+		<form>
+		<h1>BIENVENIDO A LA PÁGINA DE REGISTRO DE CLIENTES</h1>
+        <H2>EN ESTA PÁGINA VAS A PODER REGISTRAR USUARIOS NUEVOS EN TU BASE DE DATOS</H2>
+		<h3>PARA PODER VER LOS CLIENTES VAS A TENER QUE REGISTRARTE COMO USUARIO O INICIAR SESIÓN SI YA TENÉS TU CUENTE</h3>
+		<h3>EN CASO DE QUE QUIERAS MODIFICAR O CAMBIAR ALGÚN DATO ES NECESARIO CONTAR CON UNA CUENTA DE ADMIN</h3>
+        <h4>HAGA CLICK EN EL SIGUIENTE BOTÓN PARA INICIAR EL REGISTRO</h4>
+        <a class="registrarclientes-btn" aria-current="page" href="http://127.0.0.1:8000/registrodeclientes/">REGISTRAR CLIENTE</a>
+		</form>
+	</div>
+</body>
+</html>
+{% endblock %}
