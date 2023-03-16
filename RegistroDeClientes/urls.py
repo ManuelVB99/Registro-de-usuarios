@@ -24,6 +24,6 @@ urlpatterns = [
     path("", include("Modelos.urls")),
     path("login/", login_request),
     path("registro/", registro),
-    path('logout/', LogoutView.as_view(template_name='clientes.html'), name="Logout"),
+    path('logout/', LogoutView.as_view(template_name='inicio.html'), name="Logout"),
 
 ]

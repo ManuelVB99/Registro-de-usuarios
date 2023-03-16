@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Formulario de Clientes</title>
 	<style>
 		body {
 			background-color: #f2f2f2;
@@ -26,6 +25,7 @@
 
 		.login-btn,
 		.register-btn,
+		.registrarclientes-btn,
 		.salir-btn,
 		.perfil-btn,
 		.inicio-btn{
@@ -39,18 +39,60 @@
 			margin-left: 10px;
 		}
 
+		.btn-borrar {
+		    color: #fff;
+		    background-color: #d9534f;
+		    border-color: #d43f3a;
+		}
+		.btn-editar {
+		    color: #fff;
+		    background-color: #5cb85c;
+		    border-color: #4cae4c;
+		}
+		.btn {
+		    display: inline-block;
+		    margin-bottom: 0;
+		    font-weight: 400;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    -ms-touch-action: manipulation;
+		    touch-action: manipulation;
+		    cursor: pointer;
+		    border: 1px solid transparent;
+		    padding: 6px 12px;
+		    font-size: 14px;
+		    line-height: 1.42857143;
+		    border-radius: 4px;
+		}
 		.login-btn:hover,
 		.register-btn:hover,
+		.registrarclientes-btn:hover,
 		.salir-btn:hover,
 		.perfil-btn:hover,
+		.editar-btn:hover,
 		.inicio-btn:hover{
 			background-color: #0062cc;
 		}
 
+		h1 {
+			color: #000000;
+			margin-bottom: 40px;
+		}
+
 		h2 {
+			color: #000000;
+			margin-bottom: 40px;
+		}
+		h3 {
 			color: #000000;
 			margin-bottom: 30px;
 		}
+		h4 {
+			color: #000000;
+			margin-bottom: 30px;
+		}
+
 
 		form {
 			background-color: #B0C4DE;
@@ -58,7 +100,7 @@
 			padding: 20px;
 			border-radius: 10px;
 			box-shadow: 0 0 10px rgba(0,0,0,0.1);
-			width: 400px;
+			width: 50%;
 			text-align: center;
 		}
 
@@ -70,8 +112,7 @@
 		}
 
 		input[type="text"],
-		input[type="email"],
-		input[type="date"]{
+		input[type="email"] {
 			padding: 10px;
 			border: 1px solid #cccccc;
 			border-radius: 5px;
@@ -95,12 +136,15 @@
 			background-color: #0062cc;
 		}
 	</style>
+	<title>Formulario de Clientes</title>
 </head>
 {% block contenido %}
+
 <body>
 	<div class="header">
 		<div style="margin-right: auto; display: flex; justify-content: space-between;">
 			<a class="inicio-btn" href="http://127.0.0.1:8000/">Inicio</a>
+			<a class="inicio-btn" href="http://127.0.0.1:8000/registrodeclientes/">Registrar Cliente</a>
 		</div>
 		{% if request.user.is_authenticated %}
 		<a class="perfil-btn" aria-current="page" href="http://127.0.0.1:8000/perfil/">{{user.username}}</a>
@@ -111,24 +155,16 @@
 		<a class="register-btn" href="http://127.0.0.1:8000/registro/">Registro</a>
 		{% endif %}
 	</div>
+	<div class="header"><a class="volver-btn" href="http://127.0.0.1:8000/registrodeclientes/">Volver</a></div>
 	<div class="container">
-		<form method='POST'>
-			{% csrf_token %}
-			<h2>REGISTRO DE NUEVOS CLIENTES</h2>
-			<label>Nombre:</label>
-			<input type="text" name="nombre">
-
-			<label>Apellido:</label>
-			<input type="text" name="apellido">
-
-			<label >Correo Electrónico:</label>
-			<input type="email" name="mail">
-
-			<label>Fecha de Registro:</label>
-			<input type="date" name="fecha_registro">
-
-            <button type="submit" class="perfil-btn">Registrar</button>
-			<a class="login-btn" href="http://127.0.0.1:8000/clientes/">Ver Clientes</a>
+		<form>
+		<h1>CLIENTES REGISTRADOS</h1>
+		{% for c in clientes %}
+        <h3>{{c.nombre}} | {{c.apellido}} | {{c.mail}} | {{c.fecha_registro}}
+		<a class="btn btn-editar" href="/editarcliente/{{c.id}}">Edit</a>
+		<a class="btn btn-borrar" href="/borrarcliente/{{c.id}}">Borrar</a>
+		</h3>
+		{% endfor %}
 		</form>
 	</div>
 </body>

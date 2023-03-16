@@ -35,7 +35,7 @@
 
 		.login-btn,
 		.register-btn,
-		.volver-btn{
+		.inicio-btn{
 			background-color: #00008B;
 			color: #ffffff;
 			padding: 10px 20px;
@@ -46,7 +46,8 @@
 			margin-left: 10px;
 		}
 		.login-btn:hover,
-		.register-btn:hover{
+		.register-btn:hover
+		..inicio-btn:hover{
 			background-color: #0062cc;
 		}
 
@@ -82,14 +83,17 @@
 </head>
 <body>
 	<div class="header">
+		<div style="margin-right: auto; display: flex; justify-content: space-between;">
+			<a class="inicio-btn" href="http://127.0.0.1:8000/">Inicio</a>
+			<a class="inicio-btn" href="http://127.0.0.1:8000/registrodeclientes/">Registrar Cliente</a>
+		</div>
 		<a class="login-btn" href="http://127.0.0.1:8000/login/">Login</a>
 		<a class="register-btn" href="http://127.0.0.1:8000/registro/">Registro</a>
 	</div>
-	<div class="header"><a class="volver-btn" href="http://127.0.0.1:8000/">Volver</a></div>
 	<div class="container">
 		<form method="POST">
 			{% csrf_token %}
-			<h2>Inicio de sesión</h2>
+			<h2>INICIO DE SESIÓN</h2>
 			<label for="username">Nombre de usuario:</label>
 			<input type="text" id="username" name="username" required>
 
