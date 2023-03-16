@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario de Clientes</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 90vh;
+		}
+
+		.header {
+			display: flex;
+			justify-content: flex-end;
+			padding: 10px;
+			background-color: #f2f2f2;
+
+		}
+
+		.login-btn,
+		.register-btn,
+		.salir-btn,
+		.perfil-btn,
+		.inicio-btn{
+			background-color: #00008B;
+			color: #ffffff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-left: 10px;
+		}
+
+		.login-btn:hover,
+		.register-btn:hover,
+		.salir-btn:hover,
+		.perfil-btn:hover,
+		.inicio-btn:hover{
+			background-color: #0062cc;
+		}
+
+		h2 {
+			color: #000000;
+			margin-bottom: 30px;
+		}
+
+		form {
+			background-color: #B0C4DE;
+			border: 1px solid #dddddd;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+			width: 500px;
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #2F4F4F;
+			text-align: left;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="date"]{
+			padding: 10px;
+			border: 1px solid #cccccc;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			font-size: 16px;
+		}
+
+		input[type="submit"] {
+			background-color: #00008B;
+			color: #ffffff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #0062cc;
+		}
+	</style>
+</head>
+{% block contenido %}
+<body>
+	<div class="header">
+		<div style="margin-right: auto; display: flex; justify-content: space-between;">
+			<a class="inicio-btn" href="http://127.0.0.1:8000/">Inicio</a>
+			<a class="inicio-btn" href="http://127.0.0.1:8000/registrodeclientes/">Registrar Cliente</a>
+		</div>
+		{% if request.user.is_authenticated %}
+		<a class="perfil-btn" aria-current="page" href="http://127.0.0.1:8000/perfil/">{{user.username}}</a>
+        <a class="salir-btn" aria-current="page" href="http://127.0.0.1:8000/logout/">Salir</a>
+		{% endif %}
+		{% if not request.user.is_authenticated %}
+		<a class="login-btn" href="http://127.0.0.1:8000/login/">Login</a>
+		<a class="register-btn" href="http://127.0.0.1:8000/registro/">Registro</a>
+		{% endif %}
+	</div>
+	<div class="container">
+		<form>
+			<h1>INFORMACIÓN DEL USUARIO<br></h1>
+			<h2>Usuario: {{ user.username }}<br></h2>
+			<h2>Mail: {{ user.email }}<br></h2>
+			<h2>Nombre: {{ user.first_name }}<br></h2>
+			<h2>Apellido: {{ user.last_name }}<br><br></h2>
+			<a class="perfil-btn" href="http://127.0.0.1:8000/editarperfil/"> Editar Perfil </a>
+		</form>
+	</div>
+</body>
+</html>
+{% endblock %}

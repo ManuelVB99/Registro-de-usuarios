@@ -42,6 +42,9 @@ def registro(request):
     form = registrousuario()
     return render(request, "registro.html", {'form': form})
 
+@login_required
+def perfilView(request):
+    return render(request, 'perfil.html')
 
 @login_required
 def editarperfil(request):
@@ -55,9 +58,9 @@ def editarperfil(request):
             user_info.first_name = form.cleaned_data.get('first_name')
             user_info.last_name = form.cleaned_data.get('last_name')
             user_info.save()
-
+            return render(request, "perfil.html")
         else:
-            return render(request, "index.html", {'form': form})
+            return render(request, "login.html", {'form': form})
     else:
         form = UserEditForm(
             initial={'email': usuario.email, 'username': usuario.username, 'first_name': usuario.first_name,
@@ -73,8 +76,8 @@ def cambiarpassword(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return render(request, 'index.html')
+            return render(request, 'perfil.html')
 
     else:
         form = ChangePasswordForm(data=request.POST, user=usuario)
-    return render(request, 'cambiarpassword.html', {'form': form, 'usuario': usuario})
+    return render(request, 'cambiarcontraseña.html', {'form': form, 'usuario': usuario})
